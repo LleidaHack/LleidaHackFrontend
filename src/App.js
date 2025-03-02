@@ -20,13 +20,24 @@ import RequireAuth from "src/modules/RequireAuth";
 import RequireLleidahacker from "./modules/RequireLleidahacker";
 import ResetPassword from "./pages/hackeps/ResetPassword";
 import PasswordForget from "./pages/hackeps/ForgetPassword";
-import Dashboard from "./pages/hackeps/Dashboard/Dashboard";
 import "src/utils/ensure-basename";
 import { refreshToken } from "./services/AuthenticationService";
 import LoginVerify from "./pages/hackeps/LoginVerify";
 import EventsLanding from "./pages/Landing/EventsLanding";
 import LegalInfoLanding from "./pages/Landing/LegalInfoLanding";
 import Error404Landing from "./pages/Landing/Error404Landing";
+import Dashboard from "./pages/Administrator/Dashboard";
+import EventsDash from "./pages/Administrator/EventsDash";
+import JuntaPage from "./pages/Administrator/JuntaPage";
+import DevsPage from "./pages/Administrator/DevsPage";
+import MarketingPage from "./pages/Administrator/MarketingPage";
+import ContactesPage from "./pages/Administrator/ContactesPage";
+import TechmeetingPage from "./pages/Administrator/TechmeetingPage";
+import AdminPanelPage from "./pages/Administrator/AdminPanelPage";
+import LleidaHacker from "./pages/Administrator/LleidaHacker";
+import HackepsDashboardPage from "./pages/Administrator/HackepsDashboardPage";
+import NewsLanding from "./pages/Landing/NewsLanding";
+
 import "src/styles/styles.css";
 import ConfirmAssistancePage from "./pages/hackeps/Confirm";
 import Hacking from "./pages/hackeps/Hacking";
@@ -86,14 +97,6 @@ export default function App() {
               </RequireAuth>
             }
           />
-          <Route
-            path="/dashboard"
-            element={
-              <RequireLleidahacker originalRoute="/dashboard">
-                <Dashboard />
-              </RequireLleidahacker>
-            }
-          />
           <Route path="/forgot-password" element={<PasswordForget />} />
           <Route path="/user-verification" element={<LoginVerify />} />
           <Route path="/assistance" element={<ConfirmAssistancePage />} />
@@ -101,16 +104,31 @@ export default function App() {
           <Route path="/hacking" element={<Hacking />} />
         </Routes>
       </Router>
-      {/*
+
       <Router basename="/lleidahack">
         <Routes>
           <Route path="/" element={<HomeLanding />} />
           <Route path="/home" element={<HomeLanding />} />
           <Route path="*" element={<Error404Landing />} />
           <Route path="/events" element={<EventsLanding />} />
+          <Route path="/noticies" element={<NewsLanding />} />
           <Route path="/legalinfo" element={<LegalInfoLanding />} />
         </Routes>
-      </Router>*/}
+      </Router>
+      <Router basename="/admin">
+        <Routes>
+          <Route path="/" element={<Dashboard />} />
+          <Route path="/events" element={<EventsDash />} />
+          <Route path="/grups/junta" element={<JuntaPage />} />
+          <Route path="/grups/devs" element={<DevsPage />} />
+          <Route path="/grups/marketing" element={<MarketingPage />} />
+          <Route path="/grups/contactes" element={<ContactesPage />} />
+          <Route path="/grups/techmeetings" element={<TechmeetingPage />} />
+          <Route path="/grups/admin-panel" element={<AdminPanelPage />} />
+          <Route path="/lleidahacker/:id" element={<LleidaHacker />} />
+          <Route path="/hackeps-dashboard" element={<HackepsDashboardPage />} />
+        </Routes>
+      </Router>
     </div>
   );
 }

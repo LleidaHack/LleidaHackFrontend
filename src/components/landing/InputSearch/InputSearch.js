@@ -1,37 +1,8 @@
 import { React, useState, useEffect } from "react";
 import ButtonLleidahack from "src/components/buttons/ButtonLleidahack";
-
-const InputSearch = ({ placeholder, searchtype }) => {
-  const [itemTextButtonSearch, setItemTextButtonSearch] = useState("Cercar");
-  if (searchtype == "events") {
-    //buscador de events
-  } else if (searchtype == "news") {
-    //buscador de news
-  }
-
-  useEffect(() => {
-    if (window.innerWidth <= 768) {
-      setItemTextButtonSearch(<i className="fa-solid fa-magnifying-glass"></i>);
-    } else {
-      setItemTextButtonSearch("Cercar");
-    }
-  }, []);
-
-  useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth <= 768) {
-        setItemTextButtonSearch("🔍");
-      } else {
-        setItemTextButtonSearch("Cercar");
-      }
-    };
-
-    window.addEventListener("resize", handleResize);
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
+import { useSearch } from "src/context/SearchContext";
+const InputSearch = ({ itemTextButtonSearch}) => {
+  const{setSearchTerm, placeholder} = useSearch(); 
 
   return (
     <div className="input-search border border-grayColor h-9 relative bg-white rounded flex flex-row">
@@ -39,6 +10,7 @@ const InputSearch = ({ placeholder, searchtype }) => {
         type="text"
         placeholder={placeholder}
         className="w-full h-full border-none rounded-md p-4"
+        onChange={(e) => setSearchTerm(e.target.value)}
       />
       <ButtonLleidahack primary white className="px-12">
         {itemTextButtonSearch}
